@@ -2,7 +2,7 @@ FROM python:3.10
 # FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
 # ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9 6ED0E7B82643E131 F8D2585B8783D481
+RUN curl -s URL | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
 
 # 安装其他必要的软件
 RUN apt-get update && apt-get install -y --no-install-recommends \
