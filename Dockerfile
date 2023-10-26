@@ -2,7 +2,7 @@ FROM python:3.10
 # FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
 # ENV DEBIAN_FRONTEND=noninteractive
 
-# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E9840D386FA1D9 6E0DE7B82643E131 F8D25858B783D481 54404762BBB6E853 BDE6D2B9216EC7A8
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9 6ED0E7B82643E131 F8D2585B8783D481
 
 # 安装其他必要的软件
 RUN apt-get update && apt-get install -y --no-install-recommends \
