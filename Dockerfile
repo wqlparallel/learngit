@@ -1,14 +1,18 @@
 FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg2 && \
-    curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/7fa2af80.pub | apt-key add - && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C && \
-    apt-get purge -y --auto-remove curl gnupg2 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    libgl1 libglib2.0-0 wget git curl vim python3.10 python3-pip && \
+# 更新软件源，并安装必要的工具
+RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg2
+
+# 导入NVIDIA的公钥
+RUN curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/7fa2af80.pub | apt-key add -
+
+# 导入Ubuntu的公钥
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
+
+# 安装其他必要的软件
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1 libglib2.0-0 wget git vim python3.10 python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
