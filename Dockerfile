@@ -1,5 +1,5 @@
-FROM registry.cn-beijing.aliyuncs.com/xiangxian-ali/python:qwen.cpu.v1
-# FROM python:3.10
+# FROM registry.cn-beijing.aliyuncs.com/xiangxian-ali/python:qwen.cpu.v1
+FROM python:3.10
 # FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
