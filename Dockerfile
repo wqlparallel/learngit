@@ -1,12 +1,6 @@
 FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 更新软件源，并安装必要的工具
-RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg2
-
-# 导入NVIDIA的公钥
-RUN curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/7fa2af80.pub | apt-key add -
-
 # 导入Ubuntu的公钥
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
 
