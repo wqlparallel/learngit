@@ -11,12 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 导入Ubuntu的公钥
 # RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
 
-# 安装其他必要的软件
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-    libgl1 libglib2.0-0 wget git vim python3.10 python3-pip && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 RUN git clone https://github.com/QwenLM/Qwen.git && \
     cd /Qwen && \
     pip3 install -r requirements.txt && \
@@ -26,4 +20,4 @@ COPY --from=registry.cn-beijing.aliyuncs.com/xiangxian-ali/qwen:model-only-7b /Q
 
 WORKDIR /Qwen/
 
-CMD ["python3", "web_demo.py", "--checkpoint-path=/Qwen/models/Qwen-7B-Chat", "--server-name=0.0.0.0","--server-port=8888"]
+CMD ["python3", "web_demo.py", "--checkpoint-path=/Qwen/models/Qwen-7B-Chat", "--server-name=0.0.0.0","--server-port=8888", "--cpu-only"]
