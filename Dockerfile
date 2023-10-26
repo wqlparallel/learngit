@@ -4,7 +4,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/7fa2af80.pub && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg2 && \
+    curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/7fa2af80.pub | apt-key add - && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C && \
+    apt-get purge -y --auto-remove curl gnupg2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get update && apt-get install -y --no-install-recommends \
     libgl1 libglib2.0-0 wget git curl vim python3.10 python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
