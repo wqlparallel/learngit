@@ -1,11 +1,18 @@
-FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
+FROM python:3.10
+# FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
-
-# 导入Ubuntu的公钥
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
 
 # 安装其他必要的软件
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1 libglib2.0-0 wget git vim python3-pip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
+# 导入Ubuntu的公钥
+# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
+
+# 安装其他必要的软件
+# RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1 libglib2.0-0 wget git vim python3.10 python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
