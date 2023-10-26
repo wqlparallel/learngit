@@ -2,7 +2,10 @@ FROM python:3.10
 # FROM docker.io/nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04
 # ENV DEBIAN_FRONTEND=noninteractive
 
-RUN curl -s URL | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
+# 创建keyrings目录、下载并保存GPG密钥，配置APT软件仓库
+RUN mkdir -p /etc/apt/keyrings/ \
+    && wget -O- https://example.com/EXAMPLE.gpg | gpg --dearmor | tee /etc/apt/keyrings/EXAMPLE.gpg > /dev/null \
+    && echo "deb [signed-by=/etc/apt/keyrings/EXAMPLE.gpg] https://example.com/apt stable main" | tee /etc/apt/sources.list.d/EXAMPLE.list
 
 # 安装其他必要的软件
 RUN apt-get update && apt-get install -y --no-install-recommends \
